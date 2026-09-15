@@ -1,0 +1,17 @@
+services:
+  php-shared:
+    image: php:8.3-fpm
+    container_name: shared_php_fpm
+    volumes:
+      - ./algorithms:/var/www/html/algorithms
+
+  webserver:
+    image: nginx:alpine
+    container_name: shared_nginx
+    ports:
+      - "${DJIKSTRA_PHP:-8083}:8083"
+    volumes:
+      - ./algorithms:/var/www/html
+      - ./infrastructure/docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php-shared
