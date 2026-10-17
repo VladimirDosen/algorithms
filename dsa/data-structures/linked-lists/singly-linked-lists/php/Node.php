@@ -1,12 +1,11 @@
 <?php
-
 declare(strict_types=1);
 
 class Node
 {
     public function __construct(
         private readonly mixed $value,
-        private ?Node $next = null,
+        private ?Node          $next = null,
     )
     {
     }
